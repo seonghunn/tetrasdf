@@ -171,8 +171,8 @@
           For a continuous piecewise affine (CPWA) network, the SDF is affine within each linear region, so its
           zero-level set bends only at region boundaries. Tracking these regions lets us place a vertex at every
           boundary crossing and recover the surface <i>exactly</i>. Sampling-based methods such as Marching Cubes
-          instead rely on finite samples at fixed grid points to query the field, so the extracted mesh can drift off the
-          surface.
+          instead rely on finite samples at fixed grid points to query the field, so the extracted mesh can drift from the
+          trained network's zero-level set.
         </p>
       </div>
       <figure class="method-figure">
