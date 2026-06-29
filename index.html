@@ -135,7 +135,7 @@
 
       <div class="container is-max-desktop">
         <h2 class="has-text-left">
-          <b>TetraSDF extracts a mesh that lies exactly on a neural SDF's zero-level set, while keeping its representation detail.</b> Using our network &mdash; a ReLU MLP composed with a multi-resolution tetrahedral encoder &mdash; with about one minute of training and a few seconds of extraction time, we extract a mesh that exactly matches the trained neural SDF.
+          <b>TetraSDF extracts a mesh that exactly matches a trained neural SDF's zero-level set, while keeping its representation detail.</b> Using our network &mdash; a ReLU MLP composed with a multi-resolution tetrahedral encoder &mdash; with about one minute of training and a few seconds of extraction time, we extract a mesh that exactly matches the trained neural SDF.
         </h2>
         <p class="has-text-left is-size-7">SSDF: the mean absolute SDF value predicted by the network at points sampled from the extracted mesh; ours reaches &asymp; 1e-8, the scale of machine precision.</p>
       </div>
@@ -171,7 +171,7 @@
           For a continuous piecewise affine (CPWA) network, the SDF is affine within each linear region, so its
           zero-level set bends only at region boundaries. Tracking these regions lets us place a vertex at every
           boundary crossing and recover the surface <i>exactly</i>. Sampling-based methods such as Marching Cubes
-          instead read the field on a fixed grid, so sub-cell detail is missed and the extracted mesh can drift off the
+          instead rely on finite samples at fixed grid points to query the field, so the extracted mesh can drift off the
           surface.
         </p>
       </div>
