@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid">
+  <meta name="keywords" content="TetraSDF, analytic isosurface extraction, neural SDF, multi-resolution tetrahedral grid, positional encoding, polyhedral complex, CPWA, analytic marching, geometry processing">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="kYOluMQx35QC0O9pybkxOh_pRqerioqsuLNi4VuakLE" />
+  <title>TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="static/images/icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid ">
+  <meta property="og:description" content="TetraSDF — A method for extracting analytic isosurfaces using a multi-resolution tetrahedral grid.">
+  <meta property="og:image" content="https://seonghunn.github.io/tetrasdf/static/images/teaser.png">
+  <meta property="og:url" content="https://seonghunn.github.io/tetrasdf/">
+  <meta property="og:site_name" content="TetraSDF">
+  <link rel="canonical" href="https://seonghunn.github.io/tetrasdf/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid ">
+  <meta name="twitter:description" content="TetraSDF — A method for extracting analytic isosurfaces using a multi-resolution tetrahedral grid.">
+  <meta name="twitter:image" content="https://seonghunn.github.io/tetrasdf/static/images/teaser.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid ",
+    "name": "TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid ",
+    "description": "TetraSDF — A method for extracting analytic isosurfaces using a multi-resolution tetrahedral grid.",
+    "author": [
+      {"@type": "Person", "name": "Seonghun Oh"},
+      {"@type": "Person", "name": "Youngjung Uh"},
+      {"@type": "Person", "name": "Jin-Hwa Kim"}
+    ],
+    "image": "https://seonghunn.github.io/tetrasdf/static/images/teaser.png",
+    "url": "https://seonghunn.github.io/tetrasdf/",
+    "inLanguage": "en",
+    "keywords": ["TetraSDF", "Analytic Isosurface Extraction", "Positional Encoding", "Analytic Meshing", "Analytic Marching","Polyhedral Complex", "NeuralSDF", "GPU", "Geometry Processing"]
+  }
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- FontAwesome JavaScript removed - using CDN CSS version -->
+  <!-- JavaScript files removed - using CSS-only version -->
+</head>
+<body>
+
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container ">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">TetraSDF: Analytic Isosurface Extraction with Multi-resolution Tetrahedral Grid </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://seonghunn.github.io/">Seonghun Oh</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://vilab.yonsei.ac.kr/members/professor">Youngjung Uh</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://wityworks.com/">Jin-Hwa Kim</a><sup>2,3†</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> Yonsei University,</span>
+            <span class="author-block"><sup>2</sup> Seoul National University,</span>
+            <span class="author-block"><sup>3</sup> NAVER AI Lab</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b>ECCV 2026</b></span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup> Work done during an internship at NAVER AI Lab</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>†</sup> Corresponding author</span>  
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2511.16273"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container ">
+    <div class="hero-body">
+      <img src="static/images/logo_hq.png"
+                 class="teaser-image"
+                 alt="teaser image."/>
+
+      <div class="container is-max-desktop">
+        <h2 class="has-text-left">
+          <b>TetraSDF extracts a mesh that lies exactly on a neural SDF's zero-level set, while keeping its representation detail.</b> Using our network &mdash; a ReLU MLP composed with a multi-resolution tetrahedral encoder &mdash; with about one minute of training and a few seconds of extraction time, we extract a mesh that exactly matches the trained neural SDF.
+        </h2>
+        <p class="has-text-left is-size-7">SSDF: the mean absolute SDF value predicted by the network at points sampled from the extracted mesh; ours reaches &asymp; 1e-8, the scale of machine precision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Extracting an explicit surface that exactly matches the zero-level set of a neural signed distance function (SDF) remains challenging. Sampling-based isosurfacing methods such as Marching Cubes introduce discretization error. In contrast, continuous piecewise affine (CPWA) analytic approaches typically require plain ReLU MLPs, which limits the ability to learn high-frequency SDFs in practice. We present TetraSDF, an analytic isosurface extraction framework for SDFs that retains the expressiveness of grid-based encoders while enabling exact zero-level set extraction, by representing the SDF with a ReLU MLP composed with a multi-resolution tetrahedral positional encoder. Our positional encoder's barycentric interpolation preserves a global CPWA structure, allowing us to track ReLU linear regions within an encoder-induced polyhedral complex. We further introduce a fixed analytic input preconditioner derived from the encoder’s metric to reduce directional bias, thereby stabilizing training. Across multiple benchmarks, TetraSDF matches or surpasses existing grid-based encoders in SDF reconstruction accuracy, while faithfully recovering the network’s zero-level set as a triangle mesh.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</section>
+
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Preliminary: Analytic Isosurface Extraction</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          For a continuous piecewise affine (CPWA) network, the SDF is affine within each linear region, so its
+          zero-level set bends only at region boundaries. Tracking these regions lets us place a vertex at every
+          boundary crossing and recover the surface <i>exactly</i>. Sampling-based methods such as Marching Cubes
+          instead read the field on a fixed grid, so sub-cell detail is missed and the extracted mesh can drift off the
+          surface.
+        </p>
+      </div>
+      <figure class="method-figure">
+        <img src="static/images/extraction_compare_arc.png" alt="Sampling-based vs. analytic extraction of a curved isosurface.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Method</h2>
+
+      <div class="content has-text-justified">
+        <p>
+          TetraSDF represents an SDF with a ReLU MLP composed with a multi-resolution tetrahedral positional encoder,
+          keeping the overall mapping continuous piecewise affine (CPWA) so that its zero-level set can be extracted
+          exactly as a triangle mesh.
+        </p>
+      </div>
+
+      <h3 class="title is-4">Multi-resolution tetrahedral encoder</h3>
+      <div class="content has-text-justified">
+        <img src="static/images/grid.png"
+               class="pipeline-image"
+               alt="Multi-resolution tetrahedral grid encoder."/>
+      </div>
+      <p><center class="caption-text">At each level, each cube cell is decomposed into six congruent tetrahedra, and barycentric interpolation within each tetrahedron keeps the encoder affine. The multi-level intersection of these tetrahedra forms a polyhedral cell on which a single affine piece of the CPWA mapping holds, preserving the global CPWA structure. <b>Composed with a ReLU MLP, this encoder forms a tetrahedral network that is trained to fit the SDF.</b></center></p>
+      <br>
+
+      <h3 class="title is-4">Full pipeline</h3>
+      <div class="content has-text-justified">
+        <img src="static/images/main_method.png"
+               class="pipeline-image"
+               alt="TetraSDF pipeline overview."/>
+      </div>
+      <p><center class="caption-text">After training our tetrahedral network, an input <b>x</b> is mapped by the multi-resolution tetrahedral positional encoder to interpolated features within its containing polyhedral cell C<sub><b>x</b></sub>. These cells form the encoder-induced polyhedral complex (the initial skeleton), from which we start edge subdivision. We then perform grid-aware edge subdivision that jointly tracks polyhedral cells and ReLU MLP linear regions to obtain the candidate vertex and edge sets (V, E), and finally extract mesh faces from (V, E) to obtain the final mesh. In (a)&ndash;(c), we zoom into a single edge subdivision iteration for a neuron.</center></p>
+    </div>
+  </div>
+
+</section>
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Results</h2>
+
+      <h3 class="title is-4">Ground-truth Accuracy</h3>
+      <div class="content has-text-justified">
+        <img src="static/images/result_baseline.png"
+               class="pipeline-image"
+               alt="Qualitative reconstruction comparison against ground truth."/>
+      </div>
+      <p><center class="caption-text"><i>Qualitative comparison against the ground-truth mesh. TetraSDF matches or surpasses existing grid-based encoders in SDF reconstruction accuracy.</center></i></p>
+      <br>
+
+      <h3 class="title is-4">Self-consistency</h3>
+      <div class="content has-text-justified">
+        <p>
+          Self-consistency measures how closely the extracted mesh agrees with the trained network's own zero-level set. We report it with three metrics: <b>SSDF</b> (Surface-sampled SDF), the mean
+          absolute SDF the network predicts at points sampled on the mesh surface; <b>VSDF</b> (Vertex-sampled SDF), the
+          same quantity evaluated at the mesh vertices; and <b>AD</b> (Angular Difference), the mean angle between the mesh
+          normals and the network-derived normals. For all three, zero means the mesh lies exactly on the network's
+          zero-level set. For ReLU MLP, PermutoGrid, and HashGrid we use MC512, while AM and TropicalNeRF use analytic extraction.
+        </p>
+      </div>
+      <div class="content has-text-justified">
+        <img src="static/images/logo_results_nogt.png"
+               class="pipeline-image"
+               alt="Self-consistency: SSDF, VSDF, and angular difference."/>
+      </div>
+      <p><center class="caption-text"><i>SSDF, VSDF, and AD for each method. Our analytic meshing makes our meshes exactly match the network's zero-level set, up to machine precision.</center></i></p>
+      <br>
+      <div class="content has-text-centered">
+        <img src="static/images/mcdcmt.png"
+               style="width:60%; display:block; margin:0 auto;"
+               alt="MC / MT / DC vs. ours, with vertex counts."/>
+      </div>
+      <p><center class="caption-text"><i>Sampling-based extractors (MC, MT, DC) need far more vertices to approach self-consistency, and even with a huge number of vertices they cannot become fully self-consistent, whereas ours achieves it with an order of magnitude fewer vertices.</center></i></p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{oh2025tetrasdf,
+  title={TetraSDF: Precise Mesh Extraction with Multi-resolution Tetrahedral Grid},
+  author={Oh, Seonghun and Uh, Youngjung and Kim, Jin-Hwa},
+  journal={arXiv preprint arXiv:2511.16273},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2511.16273">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

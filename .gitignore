@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Thumbnails / temp
+._*
+*.swp
+*~
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
